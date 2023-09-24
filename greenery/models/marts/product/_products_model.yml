@@ -44,4 +44,3 @@ models:
         description: Flag to spot if product was added to cart by user
       - name: quantity_purchased_by_user
         description: Number of products purchased by user
-
