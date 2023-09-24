@@ -6,7 +6,7 @@ SELECT
 	,session_id
 	,user_id
 	,page_url
-	,created_date
+	,created_at
 	,product_id
 
 FROM {{ ref("stg_postgres__events") }}
@@ -18,7 +18,7 @@ WHERE event_type = 'page_view'
 SELECT 
 
 	product_id
-	,name 
+	,name AS product_name
 	,price
 	,inventory 
 
@@ -37,7 +37,7 @@ WHERE event_type = 'add_to_cart'
 )--products_added_to_cart_during_session
 
 
-products_added_to_cart_by_user AS (
+, products_added_to_cart_by_user AS (
 SELECT
 	DISTINCT user_id
 	,product_id
@@ -64,7 +64,7 @@ SELECT
 	,page_views.session_id
 	,page_views.user_id
 	,page_views.page_url
-	,page_views.created_date
+	,page_views.created_at
 	,page_views.product_id
     ,products.product_name
     ,CASE WHEN products_added_to_cart_during_session.product_id IS NOT NULL
@@ -81,11 +81,11 @@ FROM page_views
 LEFT JOIN products 
 	ON page_views.product_id = products.product_id
 LEFT JOIN products_added_to_cart_during_session 
-	ON page_views.session_id = products_added_to_cart_during_session.session_id
+	ON page_views.session_id  = products_added_to_cart_during_session.session_id
 	AND page_views.product_id = products_added_to_cart_during_session.product_id
 LEFT JOIN products_added_to_cart_by_user
-	ON page_views.user_id = products_added_to_cart_during_session.user_id
-	AND page_views.product_id = products_added_to_cart_during_session.product_id
+	ON page_views.user_id     = products_added_to_cart_by_user.user_id
+	AND page_views.product_id = products_added_to_cart_by_user.product_id
 LEFT JOIN quantities_purchased_by_user
-	ON page_views.user_id = quantities_purchased_by_user.user_id
+	ON page_views.user_id     = quantities_purchased_by_user.user_id
 	AND page_views.product_id = quantities_purchased_by_user.product_id

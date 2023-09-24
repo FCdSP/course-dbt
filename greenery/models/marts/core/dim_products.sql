@@ -24,11 +24,12 @@ SELECT
 	,products.name 
 	,products.price
 	,products.inventory
-	,ordered_products_summary.num_orders
-	,ordered_products_summary.quantity_shipped
-	,ordered_products_summary.quantity_delivered
-	,ordered_products_summary.quantity_preparing
-	,ordered_products_summary.total_quantity 
+	,ordered_products.num_orders
+	,ordered_products.quantity_shipped
+	,ordered_products.quantity_delivered
+	,ordered_products.quantity_preparing
+	,ordered_products.total_quantity 
 
 FROM products
-left join ordered_products_summary using (product_id)
+left join ordered_products 
+	ON products.product_id = ordered_products.product_id
