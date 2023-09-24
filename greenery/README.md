@@ -20,7 +20,6 @@
 | Users with Three+ Purchases     | 71         |
 | Average Sessions per Hour       | 16.327     |
 
-
 # Week 2
 
 ## Business objectives:
@@ -28,8 +27,11 @@
 - **What is our user repeat rate?**: The ratio of users who made two or more purchases over total users.
 - **Define good indicators for potential repeat users**
 - **Define good indicators for potential non-repeat users**
-
-
+- **What assumptions are you making about each model? (i.e. why are you adding each test?)**
+- **Did you find any “bad” data as you added and ran tests on your models? How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?**
+- **How you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.**
+- **Which products had their inventory change from week 1 to week 2?**
+  
 ## Results:
 
 | Metric                          | Value      |
@@ -50,3 +52,18 @@
   - **Average delivery time for the user**
   - **Bad Reviews on the products**
   - **Bad Reviews of the platform itself**
+
+- **What assumptions are you making about each model? (i.e. why are you adding each test?)**
+  - **Since we are combining the data from staging layers, intermediate and fact/dimensions tables, we need to make sure we are linking (relationship to other tables) correclly. Also, make sure some variables aren't null, are unique etc**
+
+- **Did you find any “bad” data as you added and ran tests on your models? How did you go about either cleaning the data in the dbt model or adjusting your assumptions/tests?**
+  - **Yes, some tests are breaking, meaning we are going to have to go through what kind of erros (are there null values for variables that should always have values, are there negative values for where it shouldn't etc**
+
+- **How you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.**
+  - **1. Schedule the test to run at least daily, if not hourly for data pertaining the orders, 2. Have (small) cerimonies to check the state of the data 3. If anything is breaking, automate messages to list the data that is incorrect and try to estimate an SLA to correct it**
+
+- **Which products had their inventory change from week 1 to week 2?**
+  - **String of Pearls: -48**
+  - **Philodendron:     -26**
+  - **Pothos:           -20**
+  - **Monstera:         -13**
