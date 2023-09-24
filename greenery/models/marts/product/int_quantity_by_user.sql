@@ -7,7 +7,7 @@ SELECT
 
 FROM {{ ref("stg_postgres__orders") }} AS orders
 LEFT JOIN {{ ref("stg_postgres__order_items") }} AS lines 
-	ON orders.id = lines.order_id
+	ON orders.order_id = lines.order_id
 GROUP BY orders.user_id, lines.product_id
 )--quantities_purchased_by_user
 

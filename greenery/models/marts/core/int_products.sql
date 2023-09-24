@@ -35,17 +35,17 @@ SELECT
 			  THEN orders_items.quantity 
 			  ELSE 0 
 			  END
-         ) AS quantity_shipped,
+         ) AS quantity_shipped
 	,SUM(CASE WHEN orders.status = 'delivered' 
 			  THEN orders_items.quantity 
 			  ELSE 0 
 			  END
-         ) AS quantity_delivered,
+         ) AS quantity_delivered
 	,SUM(CASE WHEN orders.status = 'preparing' 
 			  THEN orders_items.quantity 
 			  ELSE 0 
 			  END
-         ) AS quantity_preparing,
+         ) AS quantity_preparing
     ,SUM(orders_items.quantity) AS total_quantity
 FROM orders_items
 LEFT JOIN orders 
