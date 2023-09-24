@@ -20,7 +20,7 @@
 | Users with Three+ Purchases     | 71         |
 | Average Sessions per Hour       | 16.327     |
 
-## Analysis can be seen here: https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_1_project.sql
+**Analysis can be seen here: https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_1_project.sql**
 # Week 2
 
 ## Business objectives:
@@ -69,4 +69,4 @@
   - **Pothos:           -20**
   - **Monstera:         -13**
 
-## Analysis can be seen here: https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_2_project.sql and https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_2_project_change_inventory.sql
+**Analysis can be seen here: https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_2_project.sql and https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_2_project_change_inventory.sql**
