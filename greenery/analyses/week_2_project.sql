@@ -19,7 +19,7 @@ purchases_per_user AS (
 )--purchase_counter
 
 SELECT
-    users_who_purchased,
-    users_who_purchased_twice_or_more,
-    users_who_purchased_twice_or_more / users_who_purchased as repeat_rate
+    purchase_counter.users_who_purchased
+    ,purchase_counter.users_who_purchased_twice_or_more
+    ,purchase_counter.users_who_purchased_twice_or_more / purchase_counter.users_who_purchased as repeat_rate
 FROM purchase_counter
