@@ -61,7 +61,7 @@
   - **Yes, some tests are breaking, meaning we are going to have to go through what kind of erros (are there null values for variables that should always have values, are there negative values for where it shouldn't etc**
 
 - **How you would ensure these tests are passing regularly and how you would alert stakeholders about bad data getting through.**
-  - **1. Schedule the test to run at least daily, if not hourly for data pertaining the orders, 2. Have (small) cerimonies to check the state of the data 3. If anything is breaking, automate messages to list the data that is incorrect and try to estimate an SLA to correct it**
+  - **0. Set freshness tests in the sources.yml files 1. Schedule the test to run at least daily, if not hourly for data pertaining the orders, 2. Have (small) cerimonies to check the state of the data 3. If anything is breaking, automate messages to list the data that is incorrect and try to estimate an SLA to correct it**
 
 - **Which products had their inventory change from week 1 to week 2?**
   - **String of Pearls: -48**
