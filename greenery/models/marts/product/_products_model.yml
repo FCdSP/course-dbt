@@ -10,9 +10,8 @@ models:
           - unique
           - not_null
       - name: session_id
-        description: Unique UUID for each session
+        description: UUID for each session (not necessarily unique, given on session can have multiple events and, therefore, repeat itself)
         tests:
-          - unique
           - not_null
       - name: user_id
         description: Unique UUID for each user
@@ -30,7 +29,7 @@ models:
         description: URL where the session and events happened
         tests:
           - not_null
-      - name: created_date
+      - name: created_at
         description: date for the event
         tests:
           - not_null
