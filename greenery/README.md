@@ -21,6 +21,7 @@
 | Average Sessions per Hour       | 16.327     |
 
 **Analysis can be seen here: https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_1_project.sql**
+
 # Week 2
 
 ## Business objectives:
@@ -73,3 +74,34 @@
   - **Monstera:         -13**
 
 **Analysis can be seen here: https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_2_project.sql and https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_2_project_change_inventory.sql**
+
+# Week 3
+
+## Business objectives:
+
+- **What is our overall conversion rate**: The ratio of products bought per day
+- **What is our conversion rate by product?**: The ratio of each product bought per day
+- **Why might certain products be converting at higher/lower rates than others? We don't actually have data to properly dig into this, but we can make some hypotheses**
+- **We’re starting to think about granting permissions to our dbt models in our snowflake database so that other roles can have access to them**
+- **Install a package (i.e. dbt-utils, dbt-expectations) and apply one or more of the macros to your project**
+- **Show (using dbt docs and the model DAGs) how you have simplified or improved a DAG using macros and/or dbt packages**
+- **Which products had their inventory change from week 2 to week 3?**
+
+## Results:
+- **What is our overall conversion rate**
+- **What is our conversion rate by product?**
+  - **Analysis can be seen here: https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_3_project_overall_conversion_rate.sql and https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_3_project_product_conversion_rate.sql**
+- **Why might certain products be converting at higher/lower rates than others? We don't actually have data to properly dig into this, but we can make some hypotheses**
+  - **External factors: competitors might have cheaper options, faster delivery times, different payment options**
+  - **Internal factors: product reviews, overall experience on the website, product description**
+- **We’re starting to think about granting permissions to our dbt models in our snowflake database so that other roles can have access to them**
+  - **A post-hook was added to a role called "reporting"**
+- **Install a package (i.e. dbt-utils, dbt-expectations) and apply one or more of the macros to your project**
+  - **dbt-utils was installed and used to check for null values in the tables. I also created an iterator for events and used it on the fact_product_funnel model**
+- **Which products had their inventory change from week 2 to week 3?**
+  - **ZZ Plant:         -36**
+  - **Pothos:           -20**
+  - **Monstera:         -14**
+  - **Bamboo:           -12**
+  - **Philodendron:     -10**
+  - **String of pearls: -10**

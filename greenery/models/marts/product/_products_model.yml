@@ -43,3 +43,91 @@ models:
         description: Flag to spot if product was added to cart by user
       - name: quantity_purchased_by_user
         description: Number of products purchased by user
+
+  - name: fact_product_daily_orders
+    columns:
+      - name: created_date
+        description: date for the event
+        tests:
+          - not_null
+          - relationships:
+              to: ref('int_product_traffic')
+              field: created_date
+      - name: product_id
+        description: UUID of the product viewed
+        tests:
+          - not_null
+          - relationships:
+              to: ref('int_product_traffic')
+              field: product_id
+      - name: page_url
+        description: URL where the session and events happened
+        tests:
+          - not_null
+      - name: session_count
+        description: Distinct quantity of sessions per product id and day
+        tests:
+          - not_null
+      - name: page_view_count
+        description: Quantity of page views
+        tests:
+          - not_null
+      - name: user_count
+        description: Distinct quantity of users per product id and day
+        tests:
+          - not_null
+      - name: order_count
+        description: Total quantity of orders per product id and day
+        tests:
+          - not_null
+
+  - name: fact_daily_conversion
+    columns:
+      - name: created_date
+        description: date for the event
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_product_daily_orders')
+              field: created_date
+      - name: session_count
+        description: Total quantity of sessions per day
+        tests:
+          - not_null
+      - name: order_count
+        description: Total quantity of orders per day
+        tests:
+          - not_null
+      - name: daily_conversion
+        description: Ratio of orders per session per day
+        tests:
+          - not_null
+
+  - name: fact_daily_product_conversion
+    columns:
+      - name: created_date
+        description: date for the event
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_product_daily_orders')
+              field: created_date
+      - name: product_id
+        description: UUID of the product viewed
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_product_daily_orders')
+              field: product_id
+      - name: session_count
+        description: Total quantity of sessions per day
+        tests:
+          - not_null
+      - name: order_count
+        description: Total quantity of orders per day
+        tests:
+          - not_null
+      - name: daily_conversion
+        description: Ratio of orders per session per day
+        tests:
+          - not_null
