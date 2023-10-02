@@ -88,7 +88,7 @@
 - **Which products had their inventory change from week 2 to week 3?**
 
 ## Results:
-- **What is our overall conversion rate**
+- **What is our overall conversion rate?**
 - **What is our conversion rate by product?**
   - **Analysis can be seen here: https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_3_project_overall_conversion_rate.sql and https://github.com/FCdSP/course-dbt/blob/main/greenery/analyses/week_3_project_product_conversion_rate.sql**
 - **Why might certain products be converting at higher/lower rates than others? We don't actually have data to properly dig into this, but we can make some hypotheses**
