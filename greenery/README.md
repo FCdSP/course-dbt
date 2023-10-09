@@ -189,16 +189,25 @@ WHERE inventory = 0;
   - **String of pearls**
 
 - **How are our users moving through the product funnel?**
-  - **External factors: competitors might have cheaper options, faster delivery times, different payment options**
+```	postgresql
+SELECT 
+
+*
+
+FROM dev_db.dbt_fpetribufundthroughcom.fact_product_funnel
+GROUP BY ALL;
+```
+- **Looking at the products to adding them to the cart, the page_view_to_add_cart_rate, a little over 50% of users are accounted for. But from adding the product to the cart to actually buying them, the add_to_cart_to_checkout_rate, a little over 35% of the previous number will go through. Making the final conversion rate of about 19%**
 
 - **Which steps in the funnel have largest drop off points?**
-  - **A post-hook was added to a role called "reporting"**
+  - **Like most e-commerce, the largest drop is from adding products to the cart to checking out**
 
 - **If your organization is thinking about using dbt, how would you pitch the value of dbt/analytics engineering to a decision maker at your organization?**
-  - **dbt-utils was installed and used to check for null values in the tables. I also created an iterator for events and used it on the fact_product_funnel model**
-
-- **If you are thinking about moving to analytics engineering, what skills have you picked that give you the most confidence in pursuing this next step?**
-  - **dbt-utils was installed and used to check for null values in the tables. I also created an iterator for events and used it on the fact_product_funnel model**
+  - **The conjunction between faster experimenting with properly validated datasets, for the business team. The tool have an enormous appeal to data and analytics engineering teams. Focusing on tangible benefits, like bringing the speed of new project launches, would be a major incentive for the business teams**
 
 - **How would you go about setting up a production/scheduled dbt run of your project in an ideal state?**
-  - **dbt-utils was installed and used to check for null values in the tables. I also created an iterator for events and used it on the fact_product_funnel model**
+  - **Setting up the environments: following best practices, I would set a production environment as well as development environment, to have consistency in the development process**
+  - **Organize the moving parts: having an orchestrator, like Airflow or Dagster, to organize the scheduling and to help monitor the runs**
+  - **Scheduling: Define the schedule you would need, for each layor of data**
+  - **Metadata and logs: capturing data about the runs itself will help monitor the analytics engineering layor, like duration, the changes in each table, status of the runs itself**
+  - **Monitoring: using the metadata monitor to setup rerun on critical data, separating fail runs from errors and alerting the proper teams**
