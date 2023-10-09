@@ -105,3 +105,100 @@
   - **Bamboo:           -12**
   - **Philodendron:     -10**
   - **String of pearls: -10**
+
+# Week 4
+
+## Business objectives:
+
+- **Which products had their inventory change from week 3 to week 4?**
+- **Which products had the most fluctuations in inventory? Did we have any items go out of stock in the last 3 weeks?**
+- **How are our users moving through the product funnel?**
+- **Which steps in the funnel have largest drop off points?**
+- **If your organization is thinking about using dbt, how would you pitch the value of dbt/analytics engineering to a decision maker at your organization?**
+- **If you are thinking about moving to analytics engineering, what skills have you picked that give you the most confidence in pursuing this next step?**
+- **How would you go about setting up a production/scheduled dbt run of your project in an ideal state?**
+
+## Results:
+- **Which products had their inventory change from week 3 to week 4?**
+```	postgresql
+WITH change_inventory AS (
+
+SELECT 
+
+product_id
+, name
+, price
+, inventory
+, COALESCE(LAG(INVENTORY) OVER (PARTITION BY product_id ORDER BY dbt_updated_at),INVENTORY)  AS previous_inventory
+, inventory - (COALESCE(LAG(INVENTORY) OVER (PARTITION BY product_id ORDER BY dbt_updated_at),INVENTORY)) AS change_in_inventory
+, CASE WHEN (inventory - (COALESCE(LAG(INVENTORY) OVER (PARTITION BY product_id ORDER BY dbt_updated_at),INVENTORY))) != 0 THEN 1 ELSE 0 END AS flag_change_in_inventory
+, dbt_scd_id
+, dbt_updated_at
+, dbt_valid_from
+, dbt_valid_to
+
+
+FROM dev_db.dbt_fpetribufundthroughcom.products_snapshot
+ORDER BY product_id, dbt_updated_at
+)--change_inventory
+
+SELECT 
+
+    * 
+    
+FROM change_inventory 
+WHERE flag_change_in_inventory = 1 
+  AND dbt_valid_to IS NULL 
+ORDER BY dbt_valid_from DESC, change_in_inventory
+```
+  - **Bamboo:           -21**
+  - **Monstera:         -19**
+  - **ZZ Plant:         -12**
+  - **String of pearls:  10**
+  - **Philodendron:      15**
+  - **Pothos:            20**
+
+- **Which products had the most fluctuations in inventory? Did we have any items go out of stock in the last 3 weeks?**
+```	postgresql
+SELECT 
+  product_id
+, name
+, count(*) 
+FROM dev_db.dbt_fpetribufundthroughcom.products_snapshot
+GROUP BY 1,2
+ORDER BY 3 DESC
+```
+- **The following products had at least 3 changes, all of the other ones had one change in inventory:**
+  - **Pothos:            4**
+  - **Philodendron:      4**
+  - **Monstera:          4**
+  - **String of pearls:  4**
+  - **Bamboo:            3**
+  - **ZZ Plant:          3**
+
+```	postgresql
+SELECT 
+
+    *
+
+FROM dev_db.dbt_fpetribufundthroughcom.products_snapshot
+WHERE inventory = 0;
+```
+- **The following products went out of stock:**
+  - **Pothos**
+  - **String of pearls**
+
+- **How are our users moving through the product funnel?**
+  - **External factors: competitors might have cheaper options, faster delivery times, different payment options**
+
+- **Which steps in the funnel have largest drop off points?**
+  - **A post-hook was added to a role called "reporting"**
+
+- **If your organization is thinking about using dbt, how would you pitch the value of dbt/analytics engineering to a decision maker at your organization?**
+  - **dbt-utils was installed and used to check for null values in the tables. I also created an iterator for events and used it on the fact_product_funnel model**
+
+- **If you are thinking about moving to analytics engineering, what skills have you picked that give you the most confidence in pursuing this next step?**
+  - **dbt-utils was installed and used to check for null values in the tables. I also created an iterator for events and used it on the fact_product_funnel model**
+
+- **How would you go about setting up a production/scheduled dbt run of your project in an ideal state?**
+  - **dbt-utils was installed and used to check for null values in the tables. I also created an iterator for events and used it on the fact_product_funnel model**
